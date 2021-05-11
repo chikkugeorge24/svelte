@@ -1,10 +1,13 @@
 <script>
-	export let name;
+	const name = 'Chikku George'
+	const channel = '<b>Crafts Grimoire</b>'
+	const hack = `<a href="#" onClick="alert('You have been hacked')">Win a prize</a>`
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+	<h1>Hello {name}</h1>
+	<div>{@html channel}</div>
+	<div>{@html hack}</div>
 </main>
 
 <style>

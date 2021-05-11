@@ -6,10 +6,13 @@ Radical new approach to building user interfaces.
 Unlike React or Vue, which do a bulk of thier work in browser, svelte shifts that work into a compile step that happens when we build the app.
 .svelte file consists of 3 blocks:
   1. script
+  
     logic and functionality is maintained. Basically contains JS
   2. markup
+  
     HTML of UI
   3. style
+  
     specifies styles related to the HTML in markup section
 Rollup plugin parse the .svelte file, extract each of the 3 sections and assemble them back to a format which is understandable by the browser(browser doesn't understand svelte file)
 

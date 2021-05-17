@@ -7,9 +7,19 @@
   const status = "success";
   const isPromoted = true;
   const active = true;
+  const num = -5;
 </script>
 
 <main>
+  {#if num === 0}
+    <h2>The number is zero</h2>
+  {:else if num < 0}
+    <h2>The number is negative</h2>
+  {:else if num > 0}
+    <h2>The number is positive</h2>
+  {:else}
+    <h2>Not a number</h2>
+  {/if}
   <h2 class="underline">underlined text</h2>
   <h2 class={status}>Status</h2>
   <h2 class:promoted={isPromoted}>Movie Title</h2>

@@ -8,9 +8,21 @@
   const isPromoted = true;
   const active = true;
   const num = -5;
+  const names = ["Apple", "Orange", "Grapes"];
+  const fullNames = [
+    { first: "Alan", last: "Mark" },
+    { first: "Alex", last: "Savior" },
+    { first: "David", last: "John" },
+  ];
 </script>
 
 <main>
+  {#each fullNames as name, index}
+    <h2>{index + 1} {name.first} {name.last}</h2>
+  {/each}
+  {#each names as name, index}
+    <h2>{index + 1} {name}</h2>
+  {/each}
   {#if num === 0}
     <h2>The number is zero</h2>
   {:else if num < 0}

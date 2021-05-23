@@ -1,141 +1,70 @@
 <script>
-  const formValues = {
-    name: "",
-    profileSummary: "",
-    country: "",
-    jobLocations: [],
-    remoteWork: false,
-    skillSet: [],
-    yearsOfExperience: "",
-  };
-  const submitForm = () => {
-    console.log({ formValues });
-  };
+  let firstName = "Chikku",
+    lastName = "George";
+  //Reactive declarations
+  $: fullName = `${firstName} ${lastName}`;
+  //Reactive statements
+  $: {
+    const greet = `${firstName} ${lastName}`;
+    console.log(greet);
+  }
+  let items = [
+    {
+      id: 1,
+      title: "TV",
+      price: 100,
+    },
+    {
+      id: 2,
+      title: "Phone",
+      price: 200,
+    },
+    {
+      id: 3,
+      title: "Laptop",
+      price: 300,
+    },
+  ];
+  $: total = items.reduce((total, cur) => (total = total + cur.price), 0);
+  let volume = 0;
+  $: if (volume < 0) {
+    alert("Can not go lower");
+    volume = 0;
+  } else if (volume > 20) {
+    alert("Can not go higher");
+    volume = 20;
+  }
 </script>
 
 <main>
-  <div>
-    <pre>
-      {JSON.stringify(formValues, null, 2)}
-    </pre>
-  </div>
-  <!--preventDefault prevents the reloading of screen-->
-  <form on:submit|preventDefault={submitForm}>
-    <!--TextBox Input-->
-    <div>
-      <label for="name">Name</label>
-      <input type="text" id="name" bind:value={formValues.name} />
-    </div>
+  <h2>Current volume - {volume}</h2>
+  <button on:click={() => (volume += 2)}>Increase Volume</button>
+  <button on:click={() => (volume -= 2)}>Decrease Volume</button>
 
-    <!--TextArea Input-->
-    <div>
-      <label for="profile">Profile Summary</label>
-      <textarea id="profile" bind:value={formValues.profileSummary} />
-    </div>
-
-    <!--Single Select Option-->
-    <div>
-      <label for="country">Country</label>
-      <select id="country" bind:value={formValues.country}>
-        <option value="">Select a country</option>
-        <option value="india">India</option>
-        <option value="russia">Russia</option>
-        <option value="uk">UK</option>
-      </select>
-    </div>
-
-    <!--Multi Select Option-->
-    <div>
-      <label for="job-locations">Job Locations</label>
-      <select id="job-locations" bind:value={formValues.jobLocations} multiple>
-        <option value="">Select a country</option>
-        <option value="india">India</option>
-        <option value="russia">Russia</option>
-        <option value="uk">UK</option>
-      </select>
-    </div>
-
-    <!--CheckBox Input-->
-    <div>
-      <input
-        type="checkbox"
-        id="remoteWork"
-        bind:checked={formValues.remoteWork}
-      />
-      <label for="remoteWork">Open to remote work ?</label>
-    </div>
-
-    <!--CheckBox Group -->
-    <div>
-      <label for="skillSet">Skill Set</label>
-      <input
-        type="checkbox"
-        id="html"
-        value="html"
-        bind:group={formValues.skillSet}
-      />
-      <label for="html">HTML</label>
-      <input
-        type="checkbox"
-        id="css"
-        value="css"
-        bind:group={formValues.skillSet}
-      />
-      <label for="css">CSS</label>
-      <input
-        type="checkbox"
-        id="javascript"
-        value="javascript"
-        bind:group={formValues.skillSet}
-      />
-      <label for="javascript">JavaScript</label>
-    </div>
-
-    <!--Radio input-->
-    <div>
-      <label for="yearsOfExperience">Years of Experience</label>
-      <input
-        type="radio"
-        id="0-2"
-        value="0-2"
-        bind:group={formValues.yearsOfExperience}
-      />
-      <label for="0-2">0-2</label>
-      <input
-        type="radio"
-        id="3-5"
-        value="3-5"
-        bind:group={formValues.yearsOfExperience}
-      />
-      <label for="3-5">3-5</label>
-      <input
-        type="radio"
-        id="6-10"
-        value="6-10"
-        bind:group={formValues.yearsOfExperience}
-      />
-      <label for="6-10">6-10</label>
-    </div>
-
-    <div>
-      <button type="submit">Submit</button>
-    </div>
-  </form>
+  <button
+    on:click={() => {
+      (firstName = "Clark"), (lastName = "Wane");
+    }}
+  >
+    Change Name
+  </button>
+  <h2>{firstName} {lastName}</h2>
+  <h2>{fullName}</h2>
+  <button
+    on:click={() =>
+      (items = [...items, { id: 4, title: "Keyboard", price: 50 }])}
+  >
+    Add Items
+  </button>
+  <h2>
+    Total - {total}
+  </h2>
 </main>
 
 <style>
-  input + label {
-    display: inline-flex;
-  }
   main {
     padding: 1em;
     max-width: 240px;
     margin: 0 auto;
   }
-  /* h1 {
-    color: #ff3e00;
-    text-transform: uppercase;
-    font-size: 4em;
-    font-weight: 100;
-  } */
 </style>

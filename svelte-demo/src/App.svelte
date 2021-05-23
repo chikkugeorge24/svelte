@@ -1,36 +1,141 @@
 <script>
-  let count = 0;
-  const handleClick = (event) => {
-    console.log(event);
-    count += 1;
+  const formValues = {
+    name: "",
+    profileSummary: "",
+    country: "",
+    jobLocations: [],
+    remoteWork: false,
+    skillSet: [],
+    yearsOfExperience: "",
   };
-  const handleClickWithParams = (event, stepSize) => {
-    console.log(event);
-    count += stepSize;
+  const submitForm = () => {
+    console.log({ formValues });
   };
 </script>
 
 <main>
-  <!--Inline event handlers-->
-  <button on:click={() => (count = count + 1)}>Count {count}</button>
+  <div>
+    <pre>
+      {JSON.stringify(formValues, null, 2)}
+    </pre>
+  </div>
+  <!--preventDefault prevents the reloading of screen-->
+  <form on:submit|preventDefault={submitForm}>
+    <!--TextBox Input-->
+    <div>
+      <label for="name">Name</label>
+      <input type="text" id="name" bind:value={formValues.name} />
+    </div>
 
-  <!--Using event handling function-->
-  <button on:click={handleClick}>Count {count}</button>
+    <!--TextArea Input-->
+    <div>
+      <label for="profile">Profile Summary</label>
+      <textarea id="profile" bind:value={formValues.profileSummary} />
+    </div>
 
-  <!--Event handling function with parameters-->
-  <button on:click={(event) => handleClickWithParams(event, 5)}
-    >Count {count}</button
-  >
-  <button on:click={(event) => handleClickWithParams(event, 10)}
-    >Count {count}</button
-  >
+    <!--Single Select Option-->
+    <div>
+      <label for="country">Country</label>
+      <select id="country" bind:value={formValues.country}>
+        <option value="">Select a country</option>
+        <option value="india">India</option>
+        <option value="russia">Russia</option>
+        <option value="uk">UK</option>
+      </select>
+    </div>
+
+    <!--Multi Select Option-->
+    <div>
+      <label for="job-locations">Job Locations</label>
+      <select id="job-locations" bind:value={formValues.jobLocations} multiple>
+        <option value="">Select a country</option>
+        <option value="india">India</option>
+        <option value="russia">Russia</option>
+        <option value="uk">UK</option>
+      </select>
+    </div>
+
+    <!--CheckBox Input-->
+    <div>
+      <input
+        type="checkbox"
+        id="remoteWork"
+        bind:checked={formValues.remoteWork}
+      />
+      <label for="remoteWork">Open to remote work ?</label>
+    </div>
+
+    <!--CheckBox Group -->
+    <div>
+      <label for="skillSet">Skill Set</label>
+      <input
+        type="checkbox"
+        id="html"
+        value="html"
+        bind:group={formValues.skillSet}
+      />
+      <label for="html">HTML</label>
+      <input
+        type="checkbox"
+        id="css"
+        value="css"
+        bind:group={formValues.skillSet}
+      />
+      <label for="css">CSS</label>
+      <input
+        type="checkbox"
+        id="javascript"
+        value="javascript"
+        bind:group={formValues.skillSet}
+      />
+      <label for="javascript">JavaScript</label>
+    </div>
+
+    <!--Radio input-->
+    <div>
+      <label for="yearsOfExperience">Years of Experience</label>
+      <input
+        type="radio"
+        id="0-2"
+        value="0-2"
+        bind:group={formValues.yearsOfExperience}
+      />
+      <label for="0-2">0-2</label>
+      <input
+        type="radio"
+        id="3-5"
+        value="3-5"
+        bind:group={formValues.yearsOfExperience}
+      />
+      <label for="3-5">3-5</label>
+      <input
+        type="radio"
+        id="6-10"
+        value="6-10"
+        bind:group={formValues.yearsOfExperience}
+      />
+      <label for="6-10">6-10</label>
+    </div>
+
+    <div>
+      <button type="submit">Submit</button>
+    </div>
+  </form>
 </main>
 
 <style>
+  input + label {
+    display: inline-flex;
+  }
   main {
-    text-align: center;
     padding: 1em;
     max-width: 240px;
     margin: 0 auto;
   }
+  /* h1 {
+    color: #ff3e00;
+    text-transform: uppercase;
+    font-size: 4em;
+    font-weight: 100;
+  } */
 </style>

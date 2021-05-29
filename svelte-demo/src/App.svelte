@@ -1,19 +1,17 @@
 <script>
-  import Greet from "./components/Greet.svelte";
-  const name = "Chikku",
-    channel = "Crafts Grimoire";
-  const obj = {
-    name: "Barry",
-    heroName: "Flash",
+  import PopUp from "./components/PopUp.svelte";
+  let showPopup = false;
+  const closePopup = (event) => {
+    showPopup = false;
+    console.log(event.detail);
   };
 </script>
 
 <main>
-  <Greet name="William" heroName="Batman" />
-  <Greet name="Clara" heroName="Wonderwomen" />
-  <Greet name="Clark" heroName="Batman" />
-  <Greet {name} />
-  <Greet {...obj} />
+  <button on:click={() => (showPopup = true)}>Open popup</button>
+  {#if showPopup}
+    <PopUp on:close={closePopup} />
+  {/if}
 </main>
 
 <style>

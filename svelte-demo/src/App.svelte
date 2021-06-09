@@ -1,24 +1,15 @@
 <script>
-  import TabA from "./components/TabA.svelte";
-  import TabB from "./components/TabB.svelte";
-  import TabC from "./components/TabC.svelte";
-  let activeTab = TabA;
+  import Decrement from "./components/StoreDemo/Decrement.svelte";
+  import Display from "./components/StoreDemo/Display.svelte";
+  import Increment from "./components/StoreDemo/Increment.svelte";
+  import Reset from "./components/StoreDemo/Reset.svelte";
 </script>
 
 <main>
-  <button on:click={() => (activeTab = TabA)}>Tab A</button>
-  <button on:click={() => (activeTab = TabB)}>Tab B</button>
-  <button on:click={() => (activeTab = TabC)}>Tab C</button>
-  <svelte:component this={activeTab} />
-  <!-- {#if activeTab === "TabA"}
-    <TabA />
-  {/if}
-  {#if activeTab === "TabB"}
-    <TabB />
-  {/if}
-  {#if activeTab === "TabC"}
-    <TabC />
-  {/if} -->
+  <Display />
+  <Increment />
+  <Decrement />
+  <Reset />
 </main>
 
 <style>

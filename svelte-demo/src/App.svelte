@@ -3,9 +3,11 @@
   import Display from "./components/StoreDemo/Display.svelte";
   import Increment from "./components/StoreDemo/Increment.svelte";
   import Reset from "./components/StoreDemo/Reset.svelte";
+  import Timer from "./components/StoreDemo/Timer.svelte";
 </script>
 
 <main>
+  <Timer />
   <Display />
   <Increment />
   <Decrement />
